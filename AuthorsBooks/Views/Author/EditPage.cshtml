@@ -1,0 +1,48 @@
+﻿
+@model Common.AuthorModel
+
+<link rel="stylesheet" href="~/css/fields.css" media="screen" type="text/css" />
+<style>
+    .save {
+        border-radius: 10px;
+        background-color: #4CAF50;
+        border: 1px solid green;
+        color: white;
+        padding: 8px 15px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 16px;
+        cursor: pointer;
+        margin-left: 1%;
+    }
+
+    .delete .button:hover {
+        background-color: #3e8e41;
+    }
+
+    .text-edit {
+        color: white;
+        margin-top: 1%;
+    }
+
+</style>
+
+<div style="margin-left: 1%; margin-top: -16%;" id="login-form">
+    <h3 style="color: white">EDIT AUTHOR</h3>
+    <fieldset>
+        <form asp-action="SaveChanges" data-ajax-method="POST">
+            <input type="text" name="Id" readonly="readonly" required placeholder="Id"
+                   value="@Model.Id" />
+
+            <label class="text-edit">First Name</label>
+            <input type="text" name="firstName" required placeholder="First Name"
+                   value="@Model.FirstName" pattern="^[a-zA-Z]+$" />
+
+            <label class="text-edit">Last Name</label>
+            <input type="text" name="lastName" required placeholder="Last Name"
+                   value="@Model.LastName" pattern="^[a-zA-Z]+$" />
+
+            <input type="submit" class="save" value="Save" />
+        </form>
+    </fieldset>
+</div>

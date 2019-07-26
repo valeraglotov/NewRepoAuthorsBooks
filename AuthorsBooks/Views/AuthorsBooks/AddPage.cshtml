@@ -1,0 +1,20 @@
+﻿
+<div id="login-form">
+    <h1>NEW AUTHOR BOOK</h1>
+    <fieldset>
+        <form action="/AuthorsBooks/AddAuthorsBooks" method="post">
+            <input type="text" name="BookId" required placeholder="Book Id" pattern="^[0-9]+$">
+            <input type="text" name="AuthorId" required placeholder="Author Id" pattern="^[0-9]+$">
+            <input type="text" name="Country" required placeholder="Country" pattern="^[a-zA-Z.]+$">
+            <input type="submit" value="ADD">
+        </form>
+    </fieldset>
+</div>
+
+@section Scripts {
+
+    @*<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />*@
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/fields.css" media="screen" type="text/css" />
+
+}

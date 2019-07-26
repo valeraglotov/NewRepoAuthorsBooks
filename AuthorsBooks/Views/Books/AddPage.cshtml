@@ -1,0 +1,22 @@
+﻿
+
+<div id="login-form">
+    <h1>NEW BOOK</h1>
+    <fieldset>
+        <form action="/Books/AddBook" method="post">
+            <input type="text" name="name" required placeholder="Name" pattern="^[a-zA-Z]+$">
+            <input type="text" name="publisher" required placeholder="Publisher" pattern="^[a-zA-Z.\s]+$">
+            <input type="submit" value="ADD">
+        </form>
+    </fieldset>
+</div>
+@section Scripts {
+
+
+
+
+    @*<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />*@
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/fields.css" media="screen" type="text/css" />
+
+}

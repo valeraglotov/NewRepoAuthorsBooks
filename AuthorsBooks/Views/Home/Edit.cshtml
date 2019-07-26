@@ -1,0 +1,17 @@
+﻿
+@using Common
+@model IEnumerable<Common.AuthorModel>
+
+@{
+    ViewBag.Title = "Edit Author";
+    Layout = "_Layout";
+}
+
+<h2>Edit</h2>
+@{
+    AuthorModel customer = ViewBag.AuthorModel;
+ 
+    <p>Id :@customer.Id </p>
+    <p>Name :@customer.LastName </p>
+    <p>Name :@customer.FirstName </p>
+}

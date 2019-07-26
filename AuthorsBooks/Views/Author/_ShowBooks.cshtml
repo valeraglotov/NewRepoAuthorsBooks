@@ -1,0 +1,28 @@
+﻿@using Common
+@model IEnumerable<Common.BookModel>
+
+@{
+    if (Model != null && Model.Count() > 0)
+    {
+        <div class="container">
+            <table style="margin-top: 4%;" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td style="font-weight: bold;">Id</td>
+                        <td style="font-weight: bold;">Name</td>
+                        <td style="font-weight: bold;">Publisher</td>
+                    </tr>
+                </thead>
+
+                @foreach (BookModel book in Model)
+                {
+                    <tr>
+                        <td>@book.Id</td>
+                        <td>@book.Name</td>
+                        <td>@book.Publisher</td>
+                    </tr>
+                }
+            </table>
+        </div>
+    }
+}
