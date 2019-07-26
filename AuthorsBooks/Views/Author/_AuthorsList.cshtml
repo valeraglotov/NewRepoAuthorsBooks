@@ -1,0 +1,140 @@
+﻿@model DataExtensions.ShowModel
+
+<style>
+    .delete, .search, .edit {
+        border-radius: 10px;
+        background-color: #4CAF50;
+        border: 1px solid green;
+        color: white;
+        padding: 8px 15px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        cursor: pointer;
+        float: left;
+        margin-left: 2%;
+    }
+
+        .delete .button:hover {
+            background-color: #3e8e41;
+        }
+</style>
+
+@if (Model.Authors.Count() == 0)
+{
+    <div class="alert alert-info">
+        No Author found
+    </div>
+}
+else
+{
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @Html.ActionLink("Id", "ShowAllPage",
+                        new
+                        {
+                            sortField = "Id",
+                            currentSortField = ViewBag.SortField,
+                            currentSortOrder = ViewBag.SortOrder
+                        })
+                </th>
+                <th>
+                    @Html.ActionLink("Last Name", "ShowAllPage",
+                        new
+                        {
+                            sortField = "LastName",
+                            currentSortField = ViewBag.SortField,
+                            currentSortOrder = ViewBag.SortOrder
+                        })
+                </th>
+                <th>
+                    @Html.ActionLink("First Name", "ShowAllPage",
+                        new
+                        {
+                            sortField = "FirstName",
+                            currentSortField = ViewBag.SortField,
+                            currentSortOrder = ViewBag.SortOrder
+                        })
+                </th>
+                <th style="margin-left: 10%; width: 350px;">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Authors)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.FirstName</td>
+                    <td>@item.LastName</td>
+                    <td>
+                        <ul>
+                            <li style="display: inline;">
+                                <form asp-action="Delete" style="float: left; margin-right: 3%;"
+                                      asp-route-id="@item.Id" data-ajax="true" data-ajax-success="deleteItem(this)">
+                                    <button type="submit" class="delete">
+                                        Delete
+                                    </button>
+                                </form>
+                                <button type="submit" id="@item.Id" onClick="reply_clickEdit(@item.Id)" class="edit">
+                                    Edit
+                                </button>
+                                <button type="submit" id="@item.Id" onClick="reply_clickSearch(@item.Id)" class="search">
+                                    Show Books
+                                </button>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@Html.Partial("_AuthorsPagedList", Model)
+
+<div id="searchResults">
+
+</div>
+
+<div id="editResults">
+
+</div>
+
+<script type="text/javascript">
+
+    var idForSearch = null;
+
+    function deleteItem(form) {
+        $(form).parents('li').parent('ul').parent('td').parent('tr').remove();
+    }
+
+    function reply_clickSearch(clicked_id) {
+        idForSearch = clicked_id;
+    }
+    function reply_clickEdit(clicked_id) {
+        idForSearch = clicked_id;
+    }
+
+    $('.search').click(function () {
+        var url = '@Url.Action("ShowAuthorBooks", "Author")';
+        if (idForSearch != null) {
+            $('#searchResults').load(url, { id: idForSearch });
+        }
+    });
+
+    var url = '@Url.Action("EditPage", "Author")';
+    $('.edit').click(function() {
+
+        if (idForSearch != null) {
+            $('#editResults').load(url, { id: idForSearch });
+        }
+    });
+
+</script>
+
+@section Scripts{
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
